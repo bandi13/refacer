@@ -80,7 +80,7 @@ with gr.Blocks() as demo:
                 origin.append(gr.Image(label="Face to replace"))
                 destination.append(gr.Image(label="Destination face"))
             with gr.Row():
-                thresholds.append(gr.Slider(label="Threshold",minimum=0.0,maximum=1.0,value=0.2))
+                thresholds.append(gr.Slider(label="Threshold",minimum=0.0,maximum=1.0,value=0.1))
     with gr.Row():
         button=gr.Button("Reface", variant="primary")
 
