@@ -19,22 +19,45 @@ def run(video_path,faces):
         return
 
     faces_out = []
-    for face in faces:
-        face_str = face[0].split(",")
-        origin = exists(face_str[0])
-        if origin == False:
-            print ("Can't find " + face_str[0])
-            return
-        destination = exists(face_str[1])
-        if destination == False:
-            print ("Can't find " + face_str[1])
-            return
-        
-        faces_out.append({
-                'origin':cv2.imread(face_str[0]),
-                'destination':cv2.imread(face_str[1]),
-                'threshold':float(face_str[2])
-            })
+    if len(faces) == 1:
+        destination = exists(faces[0][0])
+        if destination == True:
+            faces_out.append({
+                    'destination':cv2.imread(faces[0][0])
+                })
+        else:
+            face_str = faces[0][0].split(",")
+            origin = exists(face_str[0])
+            if origin == False:
+                print ("Can't find " + face_str[0])
+                return
+            destination = exists(face_str[1])
+            if destination == False:
+                print ("Can't find " + face_str[1])
+                return
+            
+            faces_out.append({
+                    'origin':cv2.imread(face_str[0]),
+                    'destination':cv2.imread(face_str[1]),
+                    'threshold':float(face_str[2])
+                })
+    else:
+        for face in faces:
+            face_str = face[0].split(",")
+            origin = exists(face_str[0])
+            if origin == False:
+                print ("Can't find " + face_str[0])
+                return
+            destination = exists(face_str[1])
+            if destination == False:
+                print ("Can't find " + face_str[1])
+                return
+            
+            faces_out.append({
+                    'origin':cv2.imread(face_str[0]),
+                    'destination':cv2.imread(face_str[1]),
+                    'threshold':float(face_str[2])
+                })
 
     return refacer.reface(video_path,faces_out)
 
