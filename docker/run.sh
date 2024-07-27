@@ -7,6 +7,10 @@
 # or https://1drv.ms/u/s!AsHA3Xbnj6uAgxhb_tmQ7egHACOR?e=CPoThO
 # or https://civitai.com/models/80324?modelVersionId=85159
 
+# If after suspend it doesn't start:
+# sudo rmmod nvidia_uvm
+# sudo modprobe nvidia_uvm
+
 docker stop -t 0 refacer
 docker build -t refacer -f Dockerfile.nvidia . && \
     docker run --rm --name refacer -v $(pwd)/..:/refacer -p 7860:7860 --gpus all refacer python3 app.py --server_name 0.0.0.0 &
